@@ -1,0 +1,35 @@
+/* ─── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #F9F8F6;
+  color: #1A1A1A;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #E5E5E1; border-radius: 3px; }
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection { background: #D4AF3722; }
+
+/* ─── Transitions ────────────────────────────────────────────────────────── */
+button, a, input, select, textarea {
+  transition: all 200ms ease-in-out;
+}
+
+input, select, textarea, button {
+  font-family: inherit;
+}
