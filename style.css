@@ -1,0 +1,241 @@
+/* ===== GAYATRI PATIL PORTFOLIO — SHARED STYLES ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary:        #000000;
+  --secondary:      #5e5e5e;
+  --muted:          #7a7a7a;
+  --bg:             #fdf8f8;
+  --bg-warm:        #f1edec;
+  --surface:        #f7f3f2;
+  --surface-high:   #ebe7e6;
+  --white:          #ffffff;
+  --outline:        #c4c7c7;
+  --outline-dark:   #747878;
+  --error:          #ba1a1a;
+
+  --font-display:   'Hanken Grotesk', sans-serif;
+  --font-body:      'Inter', sans-serif;
+  --font-mono:      'JetBrains Mono', monospace;
+
+  --max-w:          1280px;
+  --px:             clamp(20px, 4vw, 48px);
+  --stack-xl:       120px;
+  --stack-lg:       80px;
+  --stack-md:       48px;
+  --stack-sm:       24px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--primary);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Typography ── */
+.t-hero      { font-family: var(--font-display); font-size: clamp(40px,7vw,72px); font-weight: 700; line-height: 1.05; letter-spacing: -0.04em; }
+.t-section   { font-family: var(--font-display); font-size: clamp(28px,4.5vw,48px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+.t-project   { font-family: var(--font-display); font-size: clamp(22px,3vw,32px); font-weight: 600; line-height: 1.3; }
+.t-pro       { font-family: var(--font-body); font-size: clamp(18px,2vw,24px); font-weight: 500; line-height: 1.4; }
+.t-body-lg   { font-family: var(--font-body); font-size: 18px; font-weight: 400; line-height: 1.7; }
+.t-body      { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.6; }
+.t-label     { font-family: var(--font-body); font-size: 14px; font-weight: 500; line-height: 1.2; letter-spacing: 0.01em; }
+.t-caps      { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* ── Layout ── */
+.container   { max-width: var(--max-w); margin-inline: auto; padding-inline: var(--px); }
+.divider     { height: 1px; background: var(--outline); width: 100%; }
+.divider-dark{ height: 1px; background: var(--primary); width: 100%; }
+
+/* ── Nav ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253,248,248,.88); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--outline);
+  transition: transform .3s ease;
+}
+.nav__inner {
+  max-width: var(--max-w); margin-inline: auto; padding-inline: var(--px);
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav__logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); }
+.nav__logo span { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+.nav__links { display: flex; gap: 40px; list-style: none; }
+.nav__links a { text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); transition: color .2s; }
+.nav__links a:hover, .nav__links a.active { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+.nav__menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--primary); }
+
+@media (max-width: 768px) {
+  .nav__links { display: none; }
+  .nav__menu-btn { display: flex; }
+  .nav__links.open {
+    display: flex; flex-direction: column; gap: 0;
+    position: absolute; top: 64px; left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--outline);
+    padding: 16px var(--px);
+  }
+  .nav__links.open a { padding: 12px 0; border-bottom: 1px solid var(--outline); }
+}
+
+/* ── Hero (case study pages) ── */
+.cs-hero { padding-top: calc(64px + 80px); padding-bottom: var(--stack-lg); }
+.cs-hero__tag { color: var(--secondary); margin-bottom: 20px; display: block; }
+.cs-hero__title { margin-bottom: 24px; max-width: 900px; }
+.cs-hero__chips { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.chip { border: 1px solid var(--outline-dark); padding: 4px 14px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.cs-hero__meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 32px; border-top: 1px solid var(--outline); padding-top: 32px; }
+.cs-hero__meta-item label { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); margin-bottom: 6px; }
+.cs-hero__meta-item p { font-size: 15px; font-weight: 600; }
+
+/* ── IMAGE COMPOSITION FIX ──
+   Core principle: images show their full composition, never cropped arbitrarily.
+   Use img-frame for a fixed-height container that shows the full image.
+   Use img-natural for images that take their natural proportions.
+   Use img-cover only when deliberate cropping is the intent (e.g. portrait cards).
+── */
+
+/* Shows image at full natural size within a background, no cropping */
+.img-natural {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Image frame — full-width, immersive, no padding */
+.img-frame {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+.img-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* For project card thumbnails — deliberate portrait crop is fine here */
+.img-card-thumb {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* Hero banner: full-width, immersive, natural height */
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: var(--stack-md);
+}
+
+/* Full-bleed image, natural height */
+.img-full { width: 100%; display: block; height: auto; }
+
+/* Contained image — shows complete, no cropping */
+.img-contain {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  height: auto;
+}
+
+/* ── Case study sections ── */
+.cs-section { padding-block: var(--stack-xl); }
+.cs-section--alt { background: var(--surface); }
+.cs-section--dark { background: var(--primary); color: var(--white); }
+.cs-section--white { background: var(--white); }
+
+.cs-grid { display: grid; grid-template-columns: 4fr 8fr; gap: 48px; align-items: start; }
+@media (max-width: 900px) { .cs-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.cs-section__num { color: var(--secondary); margin-bottom: 12px; display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-mono); font-weight: 500; }
+
+/* ── Image gallery patterns ── */
+.gallery-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.gallery-3col { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.gallery-2-1  { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+
+/* Scroll gallery: images show at natural height, consistent row */
+.gallery-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+  align-items: flex-start;
+}
+.gallery-scroll img {
+  flex: 0 0 auto;
+  width: 70%;
+  scroll-snap-align: start;
+  object-fit: contain;
+  height: auto;
+  background: var(--surface);
+}
+.gallery-scroll::-webkit-scrollbar { height: 4px; }
+.gallery-scroll::-webkit-scrollbar-thumb { background: var(--outline-dark); }
+
+@media (max-width: 640px) {
+  .gallery-2col, .gallery-3col, .gallery-2-1 { grid-template-columns: 1fr; }
+  .gallery-scroll img { width: 88%; }
+}
+
+/* ── Caption ── */
+.caption { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 12px; font-family: var(--font-mono); }
+
+/* ── Pull quote ── */
+.pull-quote { border-left: 3px solid var(--primary); padding: 20px 28px; background: var(--white); font-size: clamp(17px,2vw,22px); font-style: italic; line-height: 1.5; }
+
+/* ── Stat strip ── */
+.stat-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 1px; background: var(--outline); border: 1px solid var(--outline); }
+.stat-strip__item { background: var(--white); padding: 32px 24px; }
+.stat-strip__num { font-family: var(--font-display); font-size: clamp(32px,4vw,48px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+.stat-strip__label { font-size: 13px; color: var(--secondary); }
+
+/* ── CTA next project ── */
+.next-project { background: var(--primary); color: var(--white); padding-block: var(--stack-xl); text-align: center; }
+.next-project a { text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 16px; transition: opacity .2s; }
+.next-project a:hover { opacity: .7; }
+
+/* ── Footer ── */
+.footer { border-top: 1px solid var(--outline); padding-block: 48px; }
+.footer__inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+.footer__name { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+.footer__copy { color: var(--secondary); font-size: 13px; margin-top: 4px; }
+.footer__links { display: flex; gap: 32px; list-style: none; }
+.footer__links a { text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--secondary); transition: color .2s; }
+.footer__links a:hover { color: var(--primary); }
+
+/* ── Back link ── */
+.back-link { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 13px; font-weight: 500; color: var(--secondary); letter-spacing: 0.06em; text-transform: uppercase; transition: color .2s; }
+.back-link:hover { color: var(--primary); }
+
+/* ── Scroll progress bar ── */
+#progress { position: fixed; top: 64px; left: 0; height: 2px; background: var(--primary); width: 0%; z-index: 99; transition: width .1s linear; }
+
+/* ── Hover color lift — only on elements that have a background to reveal ── */
+.img-hover-color { filter: grayscale(1); transition: filter .6s ease; }
+.img-hover-color:hover { filter: grayscale(0); }
+
+/* ── Utilities ── */
+.mt-sm  { margin-top: var(--stack-sm); }
+.mt-md  { margin-top: var(--stack-md); }
+.mt-lg  { margin-top: var(--stack-lg); }
+.mt-xl  { margin-top: var(--stack-xl); }
+.mb-sm  { margin-bottom: var(--stack-sm); }
+.mb-md  { margin-bottom: var(--stack-md); }
+.mb-lg  { margin-bottom: var(--stack-lg); }
+.text-muted   { color: var(--secondary); }
+.text-center  { text-align: center; }
+.w-full { width: 100%; }
