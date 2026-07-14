@@ -1,0 +1,1037 @@
+/* =========================================================
+   ROOT VARIABLES (Sanitized Wireframe Color Palette)
+========================================================= */
+:root {
+  /* Wireframe Layout Axis Colors */
+  --bg-light: #dcdcdc; /* Light wireframe grey */
+  --dark: #232320; /* Primary charcoal dark color */
+  --dark-2: #2b2b27;
+
+  /* Typography & Component Accent Colors */
+  --ink: #1b1a17;
+  --ink-soft: #5b584f;
+  --white: #ffffff;
+  --card-bg: #f2f2f2;
+  --tag-bg: #ffffff;
+  --tag-border: #c8c8c8;
+
+  /* Interactive Elements */
+  --blue: #2f6fef;
+  --red: #ff4438;
+  --orange: #ff8b1e;
+  --purple: #7c3aed;
+
+  /* Layout Scales */
+  --r-lg: 28px;
+  --r-md: 18px;
+  --r-sm: 10px;
+  --container: 1240px;
+  --gap-section: clamp(64px, 8vw, 120px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--dark) !important;
+  overflow-x: hidden; /* Prevents any elements from making the window wider than the screen */
+}
+
+body {
+  margin: 0;
+  background-color: transparent !important;
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden; /* Double-guarantees a locked viewport width */
+}
+
+/* =========================================================
+   THE ASYMMETRIC 70/30 SPLIT CANVAS
+========================================================= */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 70%;
+  background-color: var(--bg-light) !important;
+
+  /* Precision 3D drop shadow line between columns */
+  box-shadow:
+    25px 0 60px rgba(0, 0, 0, 0.35),
+    10px 0 20px rgba(0, 0, 0, 0.2);
+
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* =========================================================
+   GLOBAL BACKGROUND CLEANUP (Removes Rogue Fills)
+========================================================= */
+.split-bg {
+  position: relative;
+  background: transparent !important;
+}
+.split-bg::before,
+.split-bg::after {
+  display: none !important;
+}
+.hero {
+  background: transparent !important;
+}
+.projects {
+  background: transparent !important;
+}
+.capabilities {
+  background: transparent !important;
+}
+.footer {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--bg-light) !important;
+}
+
+/* =========================================================
+   1. MASTER SPACING & DIMENSION VARIABLES
+========================================================= */
+:root {
+  /* Layout Dimensions */
+  --container: 1280px; /* Maximum structural width of your content canvas */
+  --container-padding: 32px; /* Breathing room on screen edges */
+  --gap-section: clamp(
+    80px,
+    10vw,
+    140px
+  ); /* Clean vertical spacing between sections */
+
+  /* Component Radius Scales */
+  --r-lg: 24px;
+  --r-md: 16px;
+  --r-sm: 8px;
+
+  /* Color Palette Axis (Sanitized Wireframe Baseline) */
+  --bg-light: #dcdcdc;
+  --cream-2: #ece8dd;
+  --dark: #232320;
+  --dark-2: #2b2b27;
+  --ink: #1b1a17;
+  --ink-soft: #5b584f;
+  --white: #ffffff;
+  --tag-border: #c8c8c8;
+
+  /* Accents */
+  --blue: #2f6fef;
+  --red: #ff4438;
+  --orange: #ff8b1e;
+  --purple: #7c3aed;
+}
+
+/* =========================================================
+   2. GLOBAL RESET & STRUCTURAL BOX RULES
+========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--dark) !important;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: transparent !important;
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Base Asset Rules */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* 
+   The Main Grid Container:
+   Locks all core text and layout columns into a unified vertical alignment path.
+*/
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* =========================================================
+   3. TYPOGRAPHY DIMENSIONS & GRID SYSTEMS
+========================================================= */
+.section-header {
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+/* Section Title Layout Scaling */
+.section-title {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* Structural Layout Icons */
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 500,
+    "GRAD" 0,
+    "opsz" 24;
+  vertical-align: middle;
+}
+
+/* Style Variants */
+.script {
+  font-family: "Caveat", cursive;
+  font-weight: 700;
+  line-height: 0.95;
+}
+
+.display {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Hero Layout & Split Background */
+.hero-section {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(to right, #5b584f #2b2b27);
+}
+
+.hero-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.hero-left-content {
+  flex: 0 0 65%;
+  max-width: 65%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
+}
+
+.hero-right-slot {
+  flex: 0 0 35%;
+  max-width: 35%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Mouse Image Layout Alignment */
+.intersection-image {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 320px;
+  height: auto;
+  display: block;
+}
+
+/* Header Avatar Elements */
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.brand-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #d1d1d1;
+  display: block;
+}
+
+.brand-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+/* Typography styles matching Reference 2 */
+.script-title {
+  font-family: "Caveat", cursive;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 24px 0;
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #4a4a4a;
+  line-height: 1.6;
+  margin: 0 0 48px 0;
+  max-width: 480px;
+}
+
+/* CTA & Button Layout Elements */
+.cta-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f2f2f2 !important;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  display: inline-block;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Button Color Tokens */
+.btn-blue {
+  background-color: #007bff;
+}
+.btn-red {
+  background-color: #ff3b30;
+}
+.btn-orange {
+  background-color: #ff9500;
+}
+.btn-purple {
+  background-color: #af52de;
+}
+
+/* =========================================================
+   PROJECTS SECTION (Elongated Dome & Content Separation)
+========================================================= */
+.projects {
+  padding: var(--gap-section) 0;
+  position: relative;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* 
+   45% (Text) + 25% (Pills) = 70% Left Column.
+   Keeps all active text content completely clear of the dark side.
+*/
+.project-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 45% 25% 30%;
+  gap: 32px;
+  align-items: center;
+  min-height: 320px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(27, 26, 23, 0.08);
+}
+
+.project-row:last-child {
+  border-bottom: none;
+}
+
+/* =========================================================
+   PROJECT DOME ARCH (Relative Alignment Fix)
+========================================================= */
+.project-row__slot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  /* Locks the left edge exactly at the 70% boundary of the container row,
+     completely avoiding scrollbar and viewport calculation bugs */
+  left: 70%;
+
+  /* Determines how far the dome juts out into the dark column area */
+  width: clamp(200px, 20vw, 280px);
+  height: 240px;
+
+  /* Flat left edge to attach seamlessly, perfectly rounded right cap */
+  border-radius: 0 120px 120px 0;
+
+  /* Matches the light background color perfectly to create a unified shape */
+  background-color: var(--bg-light) !important;
+
+  /* Ensures text and button interactions pass through the graphic layer */
+  pointer-events: none;
+  z-index: 0;
+
+  /* Clip any image inside the dome to its curved shape */
+  overflow: hidden;
+
+  .project-dome-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0 120px 120px 0;
+    pointer-events: none;
+  }
+  /* Soft architectural drop shadow cast into the dark column zone */
+  box-shadow: 20px 12px 40px rgba(0, 0, 0, 0.22);
+
+  /* Prevents the shadow from bleeding backward onto the light column surface */
+  clip-path: inset(-100px -100px -100px 0);
+}
+
+/* Main text block confined strictly to the first column slot */
+.project-row__content {
+  position: relative;
+  z-index: 1;
+}
+
+.project-panel__eyebrow {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+
+.project-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  text-transform: none;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 12px 0;
+}
+
+.project-desc {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0 0 28px 0;
+}
+
+/* Pill container shifted cleanly to the second column slot over the light column */
+.project-row__tags {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.tag-pill {
+  background: var(--white);
+  border: 1px solid var(--tag-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.project-row:hover .tag-pill {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* Interactive explore text link element */
+.xplr-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.xplr-btn .material-symbols-outlined {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.xplr-btn:hover {
+  color: var(--blue);
+}
+
+.xplr-btn:hover .material-symbols-outlined {
+  transform: translate(2px, -2px);
+}
+
+/* =========================================================
+   RESPONSIVE OVERRIDES FOR BREAKPOINTS
+========================================================= */
+@media (max-width: 1024px) {
+  .project-row {
+    grid-template-columns: 50% 40% 10%;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 860px) {
+  .project-row__slot {
+    display: none;
+  }
+  .project-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 32px 0;
+  }
+  .project-row__tags {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+}
+
+/* Container for page alignment */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Capabilities Section Styling */
+.capabilities-section {
+  background-color: #f4f4f4; /* Light gray section background from wireframe */
+  padding: 80px 0;
+  font-family: "Inter", sans-serif;
+}
+
+/* Script Heading Style */
+.capabilities-section .section-title {
+  font-family:
+    "Georgia", cursive, serif; /* Match your specific handwriting font here */
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+}
+
+.capabilities-section .section-subtitle {
+  font-size: 1.1rem;
+  color: #666666;
+  margin-bottom: 50px;
+}
+
+/* Responsive Grid layout for the capabilities list */
+.capabilities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop */
+  gap: 24px 40px;
+}
+
+/* Individual list item styling */
+.capabilities-list li {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0; /* Subtle divider lines */
+}
+
+/* Optional minimal bullet matching your accents */
+.capabilities-list .bullet {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #ff9500; /* Use your brand accent color (blue/orange/purple) */
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+  .capabilities-section {
+    padding: 60px 0;
+  }
+
+  .capabilities-section .section-title {
+    font-size: 2.5rem;
+  }
+
+  .capabilities-list {
+    grid-template-columns: 1fr; /* Stack into 1 column on mobile */
+    gap: 16px;
+  }
+
+  .capabilities-list li {
+    font-size: 1.1rem;
+  }
+}
+
+/* Services Section Layout - Fully Transparent */
+.services-section {
+  background-color: transparent !important;
+  padding: 80px 0;
+  font-family: "Inter", sans-serif;
+}
+
+.services-section .section-title {
+  font-family: "Georgia", cursive, serif;
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 50px;
+}
+
+/* Grid setup */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+/* Base Card Styling */
+.service-card {
+  display: flex;
+  background-color: #ffffff; /* Card body remains white so text is readable */
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  min-height: 280px;
+}
+
+/* The vertical accent bar for tags on the left side of each card */
+.tags-sidebar {
+  width: 75px;
+  padding: 20px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* Vertically stacked minimal pill tags */
+.tags-sidebar .tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 6px;
+  border-radius: 12px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* YOUR REVISED COLOR BRANDING MIXIN */
+.theme-purple .tags-sidebar {
+  background-color: transparent !important;
+}
+.theme-purple .tag {
+  background-color: #af52de;
+  color: #ffffff;
+}
+
+.theme-orange .tags-sidebar {
+  background-color: #fff4e5;
+}
+.theme-orange .tag {
+  background-color: #ff9500;
+  color: #ffffff;
+}
+
+.theme-blue .tags-sidebar {
+  background-color: #e6f1ff;
+}
+.theme-blue .tag {
+  background-color: #0076ff;
+  color: #ffffff;
+}
+
+/* Main layout for text content inside the cards */
+.card-content {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  color: #555555;
+  line-height: 1.6;
+  margin: 0 0 25px 0;
+}
+
+/* XPLR Buttons */
+.btn-xplr {
+  align-self: flex-end;
+  display: inline-block;
+  background-color: #4a4a4a;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-xplr:hover {
+  background-color: #1a1a1a;
+}
+
+/* Responsive breakpoint adjustments */
+@media (max-width: 768px) {
+  .services-section {
+    padding: 60px 0;
+  }
+  .services-section .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 35px;
+  }
+  .service-card {
+    min-height: auto;
+  }
+}
+
+/* =========================================================
+   SPLIT-COLOR MAIN FOOTER (Functional Component System)
+========================================================= */
+.main-footer {
+  position: relative;
+  background-color: #ffffff;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  align-items: stretch;
+  padding: 100px 0 80px 0;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 71.8% 28.2%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Left Column Layout --- */
+.footer-content-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 140px;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-wireframe-title {
+  font-family: "Caveat", cursive;
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+}
+
+.footer-wireframe-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0;
+}
+
+.footer-bottom-left-aligned {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 64px;
+}
+
+/* Live Status Pill Layout */
+.live-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f5f5f3;
+  border: 1px solid var(--tag-border);
+  padding: 8px 16px;
+  border-radius: 30px;
+}
+
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.status-indicator-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* Brand Solid Social Grid System */
+.wireframe-social-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.social-wireframe-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.social-wireframe-box svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+}
+
+.social-wireframe-box:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.brand-linkedin {
+  background-color: #0077b5;
+}
+.brand-pinterest {
+  background-color: #bd081c;
+}
+.brand-facebook {
+  background-color: #1877f2;
+}
+.brand-instagram {
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+}
+
+/* --- Right Column Layout --- */
+.footer-content-right {
+  /* FIXED OVERLAP BUG: Increased padding from 56px to 130px to create an 
+     explicit clearance zone that pushes text out from behind the portrait. */
+  padding-left: 130px;
+  display: flex;
+  align-items: flex-start;
+  color: var(--white);
+  position: relative;
+}
+
+/* Dynamic background split panel matching global layout colors */
+.footer-content-right::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  bottom: -80px;
+  left: 0;
+  right: -2000px;
+  background-color: #5e5f62;
+  z-index: -1;
+}
+
+.about-author-block {
+  width: 100%;
+  max-width: 240px;
+  padding-top: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.about-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 6px 0;
+}
+
+.about-author-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+}
+
+/* Single Column Tag Layout Block */
+.author-tags-vertical-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.author-solid-pill {
+  display: inline-block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.07);
+  padding: 8px 16px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+/* --- Portrait Image Placement Asset Layer --- */
+.footer-portrait-layer {
+  position: absolute;
+  bottom: -80px;
+  left: 70%;
+  transform: translateX(-52%);
+  height: calc(100% + 120px);
+  display: flex;
+  align-items: flex-end;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.footer-portrait-img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* --- Responsive Layout Breakpoint --- */
+@media (max-width: 900px) {
+  .main-footer {
+    padding: 64px 0 48px 0;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+  .footer-content-left {
+    padding-right: 0;
+  }
+  .footer-bottom-left-aligned {
+    margin-top: 40px;
+    align-items: flex-start;
+  }
+  .footer-content-right {
+    padding-left: 0;
+    margin-top: 56px;
+    padding-top: 48px;
+  }
+  .footer-content-right::before {
+    top: 0;
+    bottom: -48px;
+    left: -100px;
+    right: -100px;
+  }
+  .about-author-block {
+    max-width: 100%;
+  }
+  .footer-portrait-layer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    transform: none;
+    height: 340px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 40px;
+    order: 3;
+  }
+}
