@@ -3,8 +3,8 @@
 ========================================================= */
 :root {
   /* Wireframe Layout Axis Colors */
-  --bg-light: #dcdcdc; /* Light wireframe grey */
-  --dark: #232320; /* Primary charcoal dark color */
+  --bg-light: #333333; /* Light wireframe grey */
+  --dark: #1B1B1B; /* Primary charcoal dark color */
   --dark-2: #2b2b27;
 
   /* Typography & Component Accent Colors */
