@@ -1,0 +1,724 @@
+/* =========================================================
+   Gayatri Patil — Case Study System
+   Design direction: "premium color transition" — the phrase
+   is lifted directly from the Econiq case study copy itself
+   (bronze = commerce/premium, slate = considered/sustainable,
+   never literal green). The gradient between the two is the
+   page's one signature motif: it shows up in the scroll
+   progress bar, the hero swatch rail, and section dividers,
+   and nowhere else — everything surrounding it stays quiet.
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,480;9..144,600&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* ---- color: 6 named values, no literal green, no cream+terracotta ---- */
+  --stone: #ede9e0; /* base background — warm, grey-leaning paper */
+  --stone-alt: #e2ddd1; /* alternate section background */
+  --paper: #f7f5f0; /* lightest surface, "white" sections */
+  --ink: #1c1b18; /* primary text */
+  --ink-soft: #59564d; /* secondary text */
+  --bronze: #8a6a3b; /* premium / commerce accent */
+  --bronze-soft: #c9ae83; /* bronze tint, for chips/hovers */
+  --slate: #3e4a45; /* considered / sustainable accent */
+  --slate-soft: #8b9993; /* slate tint */
+  --line: rgba(28, 27, 24, 0.12);
+  --line-strong: rgba(28, 27, 24, 0.22);
+
+  /* ---- type ---- */
+  --font-display: "Fraunces", serif;
+  --font-body: "Public Sans", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- spacing scale ---- */
+  --sp-xs: 0.5rem;
+  --sp-sm: 1rem;
+  --sp-md: 2rem;
+  --sp-lg: 4rem;
+  --sp-xl: 7rem;
+
+  /* ---- layout ---- */
+  --container: 1120px;
+  --measure: 640px; /* comfortable reading width for body copy */
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--stone);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+}
+
+@media (max-width: 700px) {
+  .container {
+    padding: 0 var(--sp-sm);
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- signature motif: the bronze→slate gradient ---- */
+#progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--bronze), var(--slate));
+  z-index: 100;
+  transition: width 0.1s ease-out;
+}
+
+.gradient-rule {
+  height: 2px;
+  width: 64px;
+  background: linear-gradient(90deg, var(--bronze), var(--slate));
+  border: none;
+  margin: 0 0 var(--sp-md);
+}
+
+/* ============ NAV ============ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(237, 233, 224, 0.88);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 1.1rem var(--sp-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  gap: var(--sp-md);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.nav__links a {
+  color: var(--ink-soft);
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.nav__links a:hover,
+.nav__links a.active {
+  color: var(--ink);
+  border-color: var(--bronze);
+}
+
+.nav__menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .nav__links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    gap: var(--sp-sm);
+    padding: var(--sp-md);
+    display: none;
+  }
+  .nav__links.open {
+    display: flex;
+  }
+  .nav__menu-btn {
+    display: block;
+  }
+}
+
+/* ============ TYPOGRAPHY ============ */
+.t-caps {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+
+.t-hero {
+  font-family: var(--font-display);
+  font-weight: 480;
+  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.page-heading {
+  font-family: var(--font-display);
+  font-weight: 480;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  margin: 0 0 var(--sp-md);
+}
+
+.text-block {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.muted {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.mb-sm {
+  margin-bottom: var(--sp-sm);
+}
+.mb-md {
+  margin-bottom: var(--sp-md);
+}
+.mt-md {
+  margin-top: var(--sp-md);
+}
+
+/* ============ BACK LINK ============ */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  transition: color 0.2s;
+}
+.back-link:hover {
+  color: var(--bronze);
+}
+
+/* ============ HERO ============ */
+.cs-hero {
+  padding: var(--sp-xl) 0 var(--sp-lg);
+}
+
+.cs-hero__tag {
+  display: block;
+  margin-bottom: var(--sp-sm);
+}
+
+.cs-hero__title {
+  max-width: 900px;
+  margin: 0 0 var(--sp-md);
+}
+
+.cs-hero__chips {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-lg);
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  color: var(--ink-soft);
+}
+
+.cs-hero__meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-md);
+  padding-top: var(--sp-md);
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 800px) {
+  .cs-hero__meta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cs-hero__meta-item label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 0.35rem;
+}
+
+.cs-hero__meta-item p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ---- signature swatch rail: brand-book style, ties the
+   "premium color transition" line from the copy to a real
+   visual element, unique to this branding case study ---- */
+.swatch-rail {
+  display: flex;
+  border: 1px solid var(--line-strong);
+  margin-top: var(--sp-lg);
+  overflow: hidden;
+}
+
+.swatch {
+  flex: 1;
+  padding: var(--sp-md) var(--sp-sm) var(--sp-sm);
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--paper);
+  border-right: 1px solid rgba(247, 245, 240, 0.25);
+}
+.swatch:last-child {
+  border-right: none;
+}
+.swatch span {
+  display: block;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+.swatch--1 {
+  background: #1c1b18;
+}
+.swatch--2 {
+  background: var(--bronze);
+}
+.swatch--3 {
+  background: #a9855c;
+}
+.swatch--4 {
+  background: var(--slate);
+}
+.swatch--5 {
+  background: var(--stone-alt);
+  color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .swatch-rail {
+    flex-wrap: wrap;
+  }
+  .swatch {
+    flex: 1 1 50%;
+    min-height: 80px;
+  }
+}
+
+/* ============ PPT DOWNLOAD ============ */
+.project-ppt {
+}
+.btn-ghost {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 0.7rem 1.3rem;
+  border: 1px solid var(--ink);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ============ SECTIONS ============ */
+.project-section {
+  padding: var(--sp-lg) 0;
+}
+
+.cs-section--alt {
+  background: var(--stone-alt);
+}
+.cs-section--white {
+  background: var(--paper);
+}
+
+.divider {
+  height: 1px;
+  background: var(--line);
+  border: none;
+  margin: 0 0 var(--sp-lg);
+}
+
+/* ---- pillar preview: short parallel items, scanned before
+   the narrative goes deep (Overview) ---- */
+.pillar-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-md);
+  margin-top: var(--sp-lg);
+  padding-top: var(--sp-md);
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 800px) {
+  .pillar-row {
+    grid-template-columns: 1fr;
+    gap: var(--sp-sm);
+  }
+}
+
+.pillar {
+  padding-top: var(--sp-sm);
+  border-top: 2px solid var(--bronze);
+}
+
+.pillar h3 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.4rem;
+}
+
+.pillar p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+/* ---- alternating image/text pairing (Challenge, Solution) ---- */
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-lg);
+  align-items: center;
+}
+
+.pair--reverse .pair__media {
+  order: 2;
+}
+.pair--reverse .pair__text {
+  order: 1;
+}
+
+@media (max-width: 800px) {
+  .pair {
+    grid-template-columns: 1fr;
+  }
+  .pair--reverse .pair__media,
+  .pair--reverse .pair__text {
+    order: initial;
+  }
+}
+
+.pair__media {
+  aspect-ratio: 4 / 3;
+  background:
+    linear-gradient(135deg, rgba(138, 106, 59, 0.18), rgba(62, 74, 69, 0.18)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(28, 27, 24, 0.05) 0 2px,
+      transparent 2px 14px
+    );
+  border: 1px solid var(--line-strong);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--sp-sm);
+}
+
+.pair__media span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.pull-quote {
+  font-family: var(--font-display);
+  font-weight: 480;
+  font-size: 1.35rem;
+  line-height: 1.4;
+  max-width: var(--measure);
+  padding-left: var(--sp-md);
+  border-left: 2px solid var(--bronze);
+  margin: var(--sp-md) 0;
+  color: var(--ink);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--sp-sm) 0 0;
+  max-width: var(--measure);
+}
+
+.feature-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.6rem;
+  color: var(--ink-soft);
+}
+
+.feature-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 1px;
+  background: var(--slate);
+}
+
+/* ---- paired panels: two parallel ideas compared directly
+   (Approach), not sequential — no numbering ---- */
+.panel-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line-strong);
+  margin-top: var(--sp-md);
+}
+
+@media (max-width: 800px) {
+  .panel-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  padding: var(--sp-md);
+  border-right: 1px solid var(--line-strong);
+}
+.panel:last-child {
+  border-right: none;
+}
+
+@media (max-width: 800px) {
+  .panel {
+    border-right: none;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .panel:last-child {
+    border-bottom: none;
+  }
+}
+
+.panel__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--slate);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.panel h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 480;
+  margin: 0 0 0.5rem;
+}
+
+.panel p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* legacy grid kept for pages not yet migrated */
+.project-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-md);
+}
+@media (max-width: 800px) {
+  .project-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.project-meta-card {
+  border: 1px solid var(--line);
+  padding: var(--sp-md);
+}
+.project-meta-card h3 {
+  font-family: var(--font-display);
+  font-weight: 480;
+  margin: 0 0 0.5rem;
+}
+.project-meta-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ---- resolution block: Reflection reads distinct-in-kind —
+   no image pairing, quiet background shift, centered weight ---- */
+.resolution {
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--sp-xl) 0;
+}
+
+.resolution .t-caps {
+  color: var(--bronze-soft);
+}
+
+.resolution .page-heading {
+  color: var(--paper);
+}
+
+.resolution__lede {
+  max-width: var(--measure);
+  font-size: 1.1rem;
+  color: rgba(247, 245, 240, 0.78);
+  margin-bottom: var(--sp-lg);
+}
+
+.resolution__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-lg);
+}
+@media (max-width: 800px) {
+  .resolution__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.resolution__item label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--slate-soft);
+  margin-bottom: 0.5rem;
+}
+.resolution__item p {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(247, 245, 240, 0.85);
+}
+
+/* ============ NEXT PROJECT / FOOTER CLOSURE BAR ============ */
+.next-project {
+  background: var(--stone-alt);
+  padding: var(--sp-lg) 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.next-project .t-hero {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: var(--sp-md) 0 var(--sp-lg);
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+}
+
+.footer__name {
+  font-family: var(--font-display);
+  font-weight: 480;
+  margin: 0;
+}
+
+.footer__copy {
+  margin: 0.2rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.footer__links {
+  list-style: none;
+  display: flex;
+  gap: var(--sp-md);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.footer__links a {
+  color: var(--ink-soft);
+  transition: color 0.2s;
+}
+.footer__links a:hover {
+  color: var(--bronze);
+}
+
+/* ============ SCROLL REVEAL ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
